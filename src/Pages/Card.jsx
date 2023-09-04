@@ -170,6 +170,142 @@ function Card() {
   //   });
   // };
 
+  const handleButtonClick = (button) => {
+    setSelectedButton(button);
+    setSelectedOption({});
+    setUpiId("");
+  };
+
+  const handleOptionChange = (value) => {
+    setSelectedOption({ [selectedButton]: value });
+  };
+
+  const handleUPIChange = (e) => {
+    setUpiId(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    // Handle submission logic here, you can access selectedButton, selectedOption, and upiId
+    console.log("Selected Button:", selectedButton);
+    console.log("Selected Option:", selectedOption[selectedButton]);
+    console.log("UPI ID:", upiId);
+  };
+
+  const renderOptions = () => {
+//i want to default call as a selected button
+
+
+    switch (selectedButton) {
+      case "call":
+        return (
+          <>
+            <Select
+              value={selectedOption[selectedButton]}
+              onChange={handleOptionChange}
+              className="flex justify-center mt-8 "
+              placeholder="Select Call Option"
+            >
+              <Option value="callOption1">Call Option 1</Option>
+              <Option value="callOption2">Call Option 2</Option>
+            </Select>
+            <br />
+            <input
+              className="border-2 border-gray-300 rounded-lg w-full"
+              value={upiId}
+              onChange={handleUPIChange}
+              placeholder="Enter Contact Number"
+            />
+            <Button
+              type="primary"
+              onClick={handleSubmit}
+              style={{ marginTop: 10 }}
+            >
+              Submit
+            </Button>
+          </>
+        );
+
+      case "link":
+        return (
+          <>
+            {/* Add options and input fields for the 'link' button */}
+            <div className="flex justify-center mt-8">
+              <Select
+                value={selectedOption[selectedButton]}
+                className="flex justify-center mt-8 w-full"
+                onChange={handleOptionChange}
+                placeholder="Select Link Option"
+              >
+                <Option value="linkOption1">Visit My Store </Option>
+                <Option value="linkOption2">Show my Work</Option>
+                <Option value="linkOption2">Visit My Portfolio</Option>
+              </Select>
+            </div>
+            <br />
+            <input
+              className="border-2 border-gray-300 p-2 rounded-lg w-full"
+              value={upiId}
+              onChange={handleUPIChange}
+              placeholder="Enter  website link"
+            />
+          </>
+        );
+
+      case "mail":
+        return (
+          <>
+            {/* Add options and input fields for the 'mail' button */}
+            <div className="flex justify-center mt-8">
+              <Select
+                value={selectedOption[selectedButton]}
+                onChange={handleOptionChange}
+                placeholder="Select Mail Option"
+                className="flex justify-center mt-8 w-full"
+              >
+                <Option value="mailOption1">mail me</Option>
+                <Option value="mailOption2">send me a mail</Option>
+              </Select>
+            </div>
+            <br />
+            <input
+              className="border-2 border-gray-300 p-2 rounded-lg w-full"
+              value={upiId}
+              onChange={handleUPIChange}
+              placeholder="Enter Mail ID"
+            />
+          </>
+        );
+      case "payment":
+        return (
+          <>
+            {/* Add options and input fields for the 'payment' button */}
+            <div className="flex justify-center mt-8">
+              <Select
+                value={selectedOption[selectedButton]}
+                onChange={handleOptionChange}
+                placeholder="Select Payment Option"
+                className="flex justify-center mt-8 w-full"
+              >
+                <Option value="paymentOption1">pay me</Option>
+                <Option value="paymentOption2">make a payment</Option>
+              </Select>
+            </div>
+            <br />
+            <input
+              className="border-2 border-gray-300 p-2 rounded-lg w-full"
+              value={upiId}
+              onChange={handleUPIChange}
+              placeholder="Enter UPI ID"
+            />
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+
   return (
     <>
       <Row>
@@ -398,6 +534,50 @@ function Card() {
                 </form>
               </div>
             </div>
+
+            <div
+                className="mt-10   border border-gray-300 rounded-md py-10 px-5 shadow-sm bg-white w-[65%] mx-auto"
+                style={{ boxShadow: "0px 0px 10px 0px #0000001a" }}
+              >
+                <h1 className="text-2xl font-bold mb-2">Main Button</h1>
+                <p>This Information will be used to create your webcard</p>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center"></div>
+                </div>
+                <form className="space-y-6" action="#" method="POST">
+                  <div className="container mx-auto mt-5 ">
+                    <Button
+                      onClick={() => handleButtonClick("call")}
+                      className="bg-gray-200 ml-2 px-3 py-1.5 rounded-md text-sm font-semibold leading-6 text-gray-900 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    >
+                      Call
+                    </Button>
+                    <Button
+                      onClick={() => handleButtonClick("link")}
+                      className="bg-gray-200 ml-2 px-3 py-1.5 rounded-md text-sm font-semibold leading-6 text-gray-900 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    >
+                      Link
+                    </Button>
+                    <Button
+                      onClick={() => handleButtonClick("mail")}
+                      className="bg-gray-200 ml-2 px-3 py-1.5 rounded-md text-sm font-semibold leading-6 text-gray-900 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    >
+                      Mail
+                    </Button>
+                    <Button
+                      onClick={() => handleButtonClick("payment")}
+                      className="bg-gray-200 ml-2 px-3 py-1.5 rounded-md text-sm font-semibold leading-6 text-gray-900 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                    >
+                      Payment
+                    </Button>
+
+                    {selectedButton && (
+                      <div className="mt-4">{renderOptions()}</div>
+                    )}
+                  </div>
+                </form>
+              </div>
+
 
             <div
               className="mt-10   border border-gray-300 rounded-md py-10 px-5 shadow-sm bg-white w-[65%] mx-auto"
