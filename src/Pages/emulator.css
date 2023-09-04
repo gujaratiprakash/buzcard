@@ -1,0 +1,17 @@
+.mobile-emulator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4; /* Background color for emulator */
+}
+
+.device-frame {
+  border: 1px solid #ccc; /* Border for the device frame */
+  border-radius: 10px; /* Rounded corners for the frame */
+  padding: 20px; /* Add padding inside the frame */
+  background-color: white; /* Background color for the device screen */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  max-width: 400px; /* Adjust the width as needed */
+  width: 100%;
+}
